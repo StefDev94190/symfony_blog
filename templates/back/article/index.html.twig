@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bulles index{% endblock %}
+
+{% block body %}
+    <a class="text-success  fs-4 position-absolute end-0 me-3" href="{{ path('app_film_new') }}">Dernier Contenu </a>
+
+    <h1 class="text-center">Liste des Blog ou Tchat ajouter</h1>
+
+    <table class="table text-white text-center">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Date de Publication</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for film in films %}
+            <tr>
+                <td>{{ article.id }}</td>
+                <td>{{ article.titre }}</td>
+                <td>{{ article.datePublication ? article.datePublication|date('d-m-Y') : '' }}</td>
+                <td><img src="{{ vich_uploader_asset(article) }}" alt="" width="100px"></td>
+                <td>
+                    <a href="{{ path('app_film_show', {'id': film.id}) }}">Read More</a>
+                    <a href="{{ path('app_film_edit', {'id': article.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Aucun Blog ou Tchat ajouité dernierment</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
